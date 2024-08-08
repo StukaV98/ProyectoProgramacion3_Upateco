@@ -1,0 +1,34 @@
+function SongCard({ song }) {
+    return (
+        <div className="card has-background-dark">
+            <div className="card-content">
+                <div className="media">
+                    <div className="media-content">
+                        <p className="title is-4 has-text-white">
+                            {song.title}
+                        </p>
+                        <p className="subtitle is-6 has-text-grey-light">
+                            {song.artist} - {song.album} ({song.year})
+                        </p>
+                    </div>
+                </div>
+                <div className="content">
+                    <audio controls>
+                        <source src={song.song_file} type="audio/mpeg" />
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                </div>
+                <div className="buttons are-small mt-3">
+                    <button className="button is-info edit-button">
+                        Modificar
+                    </button>
+                    <button className="button is-danger delete-button">
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default SongCard;
