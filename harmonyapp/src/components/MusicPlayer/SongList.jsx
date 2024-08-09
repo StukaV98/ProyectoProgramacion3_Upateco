@@ -27,7 +27,7 @@ const SongList = () => {
         }).toString();
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}harmonyhub/songs/?${query}`);
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/harmonyhub/songs/?${query}`);
             const data = await response.json();
             if (data.results) {
                 setSongs(prevSongs => [...prevSongs, ...data.results]);

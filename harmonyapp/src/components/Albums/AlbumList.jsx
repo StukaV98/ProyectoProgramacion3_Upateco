@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Album from './Album';
+import Album from './AlbumCard';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -14,7 +14,7 @@ const AlbumList = () => {
     useEffect(() => {
         const fetchAlbums = async () => {
             try {
-                const response = await fetch(`https://sandbox.academiadevelopers.com/harmonyhub/albums?page=${currentPage}&page_size=${ITEMS_PER_PAGE}`);
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/harmonyhub/albums?page=${currentPage}&page_size=${ITEMS_PER_PAGE}`);
                 const data = await response.json();
                 setAlbums(data.results);
                 setTotalPages(Math.ceil(data.count / ITEMS_PER_PAGE));

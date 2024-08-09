@@ -3,8 +3,9 @@ import Home from "../Home";
 import Songs from "../Songs";
 import Album from "../Album";
 import Contacto from "../Contacto";
-import Login from "../Login";
+import Login from "../Auth/Login";
 import Profile from "../Profile";
+import Artista from "../Artista";
 // import ProtectedRoute from './ProtectedRoute';
 
 /* enrutador version 1 */
@@ -21,20 +22,20 @@ const Router = createBrowserRouter([
                 element: <Contacto/>
             },
             {
-                path: "/Songs",
+                path: "/songs",
                 element: <Songs/>
             },
             {
-                path: "/Album",
-                element: <Album/>
+                path: "/artista",
+                element: <Artista/>
             },
             {
                 path: "/login",
                 element: <Login/>
             },
             {
-                path: "/Profile",
-                element: <Profile/>
+                path: "/album",
+                element: <Album/>
             },
         ]
     },
