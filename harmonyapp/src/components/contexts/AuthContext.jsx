@@ -1,6 +1,5 @@
-import { createContext, useContext, useReducer } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
-
+import { createContext, useReducer, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AuthContext = createContext({
     state: {},
@@ -12,13 +11,13 @@ const ACTIONS = {
     LOGOUT: "LOGOUT",
 };
 
-
 function reducer(state, action) {
     switch (action.type) {
         case ACTIONS.LOGIN:
             return {
                 ...state,
-                token: action.payload,
+                user__id: action.payload.user__id,
+                token: action.payload.token,
                 isAuthenticated: true,
             };
         case ACTIONS.LOGOUT:
@@ -30,45 +29,46 @@ function reducer(state, action) {
     }
 }
 
-function AuthProvider({ children }){
-
+function AuthProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, {
-        token: localStorage.getItem('authToken'),
-        isAuthenticated: localStorage.getItem('authToken') ? true : false,
-    })
-
-    //routing
-    const naveg = useNavigate();
-    const loc = useLocation();
+        user__id: localStorage.getItem("user__id"),
+        token: localStorage.getItem("authToken"),
+        isAuthenticated: localStorage.getItem("authToken") ? true : false,
+    });
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const actions = {
-        login: (token) => {
-            dispatch({ type:ACTIONS.LOGIN, payload: token })
-            localStorage.setItem('authToken', token)
-            const origin = loc.state?.from?.pathname || '/';
-            naveg(origin);
+        login: (token, user__id) => {
+            dispatch({ 
+                type: ACTIONS.LOGIN, 
+                payload: { token, user__id } 
+            });
+            localStorage.setItem("authToken", token);
+            localStorage.setItem("user__id", user__id);
+            const origin = location.state?.from?.pathname || "/";
+            navigate(origin);
         },
         logout: () => {
-            dispatch({ type:ACTIONS.LOGOUT })
-            localStorage.removeItem('authToken');
+            dispatch({ type: ACTIONS.LOGOUT });
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("user__id");
         },
-    }
+    };
 
-    return(
-        // Provider AuthContext
-        <AuthContext.Provider value={{state, actions}}>
-            {children}
+    return (
+        <AuthContext.Provider value={{ state, actions }}>
+            { children }
         </AuthContext.Provider>
-    )
+    );
 }
 
 function useAuth(type) {
-    const context = useContext(AuthContext)
+    const context = useContext(AuthContext);
     if (context === undefined) {
         throw new Error("useAuth must be used within an AuthProvider");
     }
     return context[type];
 }
-
 
 export { AuthContext, AuthProvider, useAuth };
