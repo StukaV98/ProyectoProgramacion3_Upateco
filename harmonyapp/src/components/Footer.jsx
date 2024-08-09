@@ -1,11 +1,13 @@
 import React from 'react'
 
 function Footer() {
-  return (
-    <div>
-        <p>Todos los derechos reservados - grupo programacion {new Date().getFullYear()}</p>
-    </div>
+
+  return(
+    <footer>
+      <p>Todos los derechos reservados - Walter Agustín Llanes {new Date().getFullYear()}</p>
+    </footer>
   )
+
 }
 
 export default Footer

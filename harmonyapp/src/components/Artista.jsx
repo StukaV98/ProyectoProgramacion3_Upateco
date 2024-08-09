@@ -14,16 +14,16 @@ function Artista() {
        })
         .then((data) => {
             setArtista(data)
-        })}, [])
+        })}, [artista])
     
-
+        
 
     return (
-    <div>
-        <h1>{artista.name}</h1>
-        <h3>{artista.bio}</h3>
-        <a href="#">Ver Más sobre {artista.name}</a>
-    </div>
+        <div>
+            <h1>{artista.name}</h1>
+            <h3>{artista.bio}</h3>
+            <a href="#">Ver Más sobre {artista.name}</a>
+        </div>
     )
 }
 

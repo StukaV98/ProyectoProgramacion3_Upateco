@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import useFetch from './hooks/useFetch'
 import { useAuth } from './contexts/AuthContext'
 
 function Login() {
@@ -31,7 +30,35 @@ function Login() {
                     return response.json();
                 })
                 .then((responseData) => {
+                    /* obtengo el token de este response Data */
                     login(responseData.token);
+                    if(responseData.token){
+                        fetch(`${import.meta.env.VITE_API_BASE_URL}users/profiles/profile_data`,{
+                            method: "GET",
+                            headers: {
+                                Authorization: `Token ${responseData.token}`,
+                                "Content-Type": "application/json",
+                            },
+                        })
+                            .then((responsePerfil) => {
+                                if(!responsePerfil.ok){
+                                    throw new Error("error al obtener ID de usuario");
+                                }
+                                return responsePerfil.json()
+                            })
+                            .then((dataPerfil) => {
+                                /* 
+                                obtengo el userID desde el 
+                                dataProfile o DataPerfil en este caso 
+                                */
+                                login(responseData.token, dataPerfil.user__id)
+                            })
+                            .catch((error) => {
+                                console.error(error);
+                                setIsError(true);
+                            })
+                        
+                    }
                 })
                 .catch((error) => {
                     console.error("Error error al iniciar sesión", error);
@@ -90,6 +117,7 @@ function Login() {
                                 {isError && <p>Error al cargar los datos.</p>}
                             </div>
                         </div>
+                        <a href="/">Inicio</a>
                     </form>
                 </div>
             </div>
