@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import useFetch from '/harmonyapp/src/components/hooks/useFetch.js'
 import { useAuth } from './contexts/AuthContext'
 
 function Login() {
@@ -14,7 +13,7 @@ function Login() {
         event.preventDefault();
         if (!isLoading) {
             setIsLoading(true);
-            fetch(`${import.meta.env.VITE_API_BASE_URL}/api-auth/`, {
+            fetch(`https://sandbox.academiadevelopers.com/api-auth/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -70,47 +69,47 @@ function Login() {
                 });
         }
     }
-    
+
     return (
-        <section className="section">
-            <div className="columns is-centered">
-                <div className="column is-4">
+        <section className="">
+            <div className="">
+                <div className="">
                     <form onSubmit={handleSubmit}>
-                        <div className="field">
+                        <div className="">
                             <label htmlFor="username">Nombre de usuario:</label>
-                            <div className="control has-icons-left">
+                            <div className="">
                                 <input
-                                    className="input"
+                                    className=""
                                     type="text"
                                     id="username"
                                     name="username"
                                     ref={usernameRef}
                                 />
-                                <span className="icon is-small is-left">
-                                    <i className="fas fa-user"></i>
+                                <span className="">
+                                    <i className=""></i>
                                 </span>
                             </div>
                         </div>
-                        <div className="field">
+                        <div className="">
                             <label htmlFor="password">Contraseña:</label>
-                            <div className="control has-icons-left">
+                            <div className="">
                                 <input
-                                    className="input"
+                                    className=""
                                     type="password"
                                     id="password"
                                     name="password"
                                     ref={passwordRef}
                                 />
-                                <span className="icon is-small is-left">
-                                    <i className="fas fa-lock"></i>
+                                <span className="">
+                                    <i className=""></i>
                                 </span>
                             </div>
                         </div>
-                        <div className="field">
-                            <div className="control">
+                        <div className="">
+                            <div className="">
                                 <button
                                     type="submit"
-                                    className="button is-primary is-fullwidth"
+                                    className=""
                                 >
                                     Enviar
                                 </button>
@@ -118,6 +117,7 @@ function Login() {
                                 {isError && <p>Error al cargar los datos.</p>}
                             </div>
                         </div>
+                        <a href="/">Inicio</a>
                     </form>
                 </div>
             </div>
