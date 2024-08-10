@@ -13,7 +13,7 @@ function Profile() {
 
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_BASE_URL}users/profiles/profile_data`,{
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/users/profiles/profile_data`,{
             method: "GET",
             headers: {
                 Authorization: `Token ${token}`,

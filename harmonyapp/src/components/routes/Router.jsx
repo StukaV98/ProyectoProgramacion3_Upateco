@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../Home";
-import Artista from "../Artista";
+import Artista from "../Artists";
 import Contacto from "../Contacto";
 import Profile from "../Profile";
 import Login from "../Login";
@@ -9,6 +9,8 @@ import ProtectedRoute from './ProtectedRoute'
 import Playlists from "../Playlists";
 import Songs from "../Songs";
 import SongCreate from "../SongCreate";
+import Artists from "../Artists";
+import ArtistCreate from "../ArtistCreate";
 
 
 const Router = createBrowserRouter([
@@ -48,14 +50,45 @@ const Router = createBrowserRouter([
                     </ProtectedRoute>
                 )
             },
-            {
-                path: "/artistas",
-                element: (
-                    <ProtectedRoute>
-                        <Artista />
-                    </ProtectedRoute>
-                )
-            },
+            //  {
+            //      path: "/artistas",
+            //      element: (
+            //          <ProtectedRoute>
+            //              <Artists />
+            //          </ProtectedRoute>
+            //      )
+            //  },
+            //  {
+            //      path: "/artistas/new",
+            //      element: (
+            //          <ProtectedRoute>
+            //              <ArtistCreate />
+            //          </ProtectedRoute>
+            //      )
+            //  },
+              {
+                  path: "/artistas",
+                  children: [
+                      {
+                          index: true,
+                          element: (
+                              (
+                                  <ProtectedRoute>
+                                      <Artists />
+                                  </ProtectedRoute>
+                              )
+                          ),
+                      },
+                      {
+                          path: "/artistas/new",
+                          element: (
+                                  <ProtectedRoute>
+                                      <ArtistCreate />
+                                  </ProtectedRoute>
+                          )
+                      },
+                  ],
+              },
             {
                 path: "/songs",
                 children: [
@@ -70,7 +103,7 @@ const Router = createBrowserRouter([
                         ),
                     },
                     {
-                        path: "new",
+                        path: "/songs/new",
                         element: (
                                 <ProtectedRoute>
                                     <SongCreate />

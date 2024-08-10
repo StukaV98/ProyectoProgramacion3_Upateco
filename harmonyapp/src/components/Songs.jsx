@@ -15,7 +15,7 @@ export default function Songs() {
     const { token , user__id } = useAuth("state");
 
 
-    let url = `${import.meta.env.VITE_API_BASE_URL}harmonyhub/songs/?page=${pagina}`
+    let url = `${import.meta.env.VITE_API_BASE_URL}/harmonyhub/songs/?page=${pagina}`
 
     /* 
         Funcion asincrona doFetch que realiza una solicitud a la API

@@ -31,7 +31,7 @@ function SongCreate() {
             newForm.append("title", cancion.title);
             newForm.append("year", cancion.year);
 
-            fetch(`${import.meta.env.VITE_API_BASE_URL}harmonyhub/songs/`,{
+            fetch(`${import.meta.env.VITE_API_BASE_URL}/harmonyhub/songs/`,{
                 method: "POST",
                 headers: {
                     Authorization: `Token ${token}`
