@@ -33,7 +33,7 @@ function Login() {
                     /* obtengo el token de este response Data */
                     login(responseData.token);
                     if(responseData.token){
-                        fetch(`${import.meta.env.VITE_API_BASE_URL}users/profiles/profile_data`,{
+                        fetch(`${import.meta.env.VITE_API_BASE_URL}/users/profiles/profile_data`,{
                             method: "GET",
                             headers: {
                                 Authorization: `Token ${responseData.token}`,
