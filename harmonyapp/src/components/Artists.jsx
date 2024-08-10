@@ -12,7 +12,8 @@ export default function Artists() {
 
     const { token, user__id } = useAuth("state");
 
-    let url = `${import.meta.env.VITE_API_BASE_URL}/harmonyhub/artists/?page=${pagina}`;
+    let url = `${import.meta.env.VITE_API_BASE_URL}harmonyhub/artists/?page=${pagina}`;
+    let paginaOwner = `${import.meta.env.VITE_API_BASE_URL}harmonyhub/artists/?owner=${user__id}`;
 
     const doFetch = async () => {
         setIsLoading(true);
@@ -38,6 +39,30 @@ export default function Artists() {
             });
     };
 
+    // function handleMyArtists() {
+    //     setArtists([]);
+    //     setIsLoading(true);
+    //     fetch(paginaOwner)
+    //         .then((response) => {
+    //             if (!response.ok) {
+    //                 throw new Error('Solicitud a los artistas erronea');
+    //             }
+    //             return response.json();
+    //         })
+    //         .then((data) => {
+    //             if (data.results) {
+    //                 setArtists(data.results);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             setIsError(true);
+    //             console.error(error, 'Error con mis artistas.');
+    //         })
+    //         .finally(() => {
+    //             setIsLoading(false);
+    //         });
+    // }
+
     function handleCargar() {
         if (nextURL) {
             setPagina((currentPage) => currentPage + 1);
@@ -56,6 +81,14 @@ export default function Artists() {
                 <a href="/songs">Canciones</a>
             </header>
             <h1>Artistas</h1>
+{/*             
+            {
+                isLoading ? (
+                    <p>Cargando artistas</p>
+                ) : null
+            }
+
+            <button onClick={handleMyArtists}>Mis artistas</button> */}
             <ul>
                 {artists.map((artist) => (
                     <ArtistCard key={artist.id} artist={artist} userId={user__id} />
@@ -64,7 +97,10 @@ export default function Artists() {
             <div>
                 {isLoading && <p>Cargando más artistas...</p>}
                 {nextURL && !isLoading && (
-                    <button onClick={handleCargar}>
+                    <button
+                        className=""
+                        onClick={handleCargar}
+                    >
                         Cargar más
                     </button>
                 )}

@@ -106,8 +106,6 @@ function PlaylistCreate() {
                     <h3>¡Playlist creada con éxito!</h3>
                     <p>Nombre: <span>{playlistCreada.name}</span></p>
                     <p>Descripción: <span>{playlistCreada.description}</span></p>
-                    <p>ID Creador: <span>{playlistCreada.owner}</span></p>
-                    <p>Fecha de creación: <span>{playlistCreada.created_at}</span></p>
                 </div>
             ) : null}
             <a href="/playlists">Volver</a>

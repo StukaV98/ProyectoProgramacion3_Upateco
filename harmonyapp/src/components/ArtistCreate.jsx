@@ -108,11 +108,9 @@ function ArtistCreate() {
                     <p>Nombre: <span>{artistCreated.name}</span></p>
                     <p>Biografía: <span>{artistCreated.bio}</span></p>
                     <p>Página Web: <span>{artistCreated.website}</span></p>
-                    {/* <p>ID Creador: <span>{artistCreated.id.owner}</span></p> */}
-                    <p>Fecha de creación: <span>{artistCreated.created_at}</span></p>
                 </div>
             ) : null }
-            <a href="/">Volver</a>
+            <a href="/artistas">Volver</a>
         </div>
     );
 }

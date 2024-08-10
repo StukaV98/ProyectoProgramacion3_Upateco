@@ -7,12 +7,13 @@ export default function Playlists() {
     const [playlists, setPlaylists] = useState([]);
     const [nextURL, setNextURL] = useState(null);
     const [isError, setIsError] = useState(false);
-    const [isLoading, setIsLoading] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [pagina, setPagina] = useState(1);
 
     const { token, user__id } = useAuth("state");
 
     let url = `${import.meta.env.VITE_API_BASE_URL}/harmonyhub/playlists/?page=${pagina}`;
+    let paginaOwner = `${import.meta.env.VITE_API_BASE_URL}/harmonyhub/playlists/?owner=${user__id}`;
 
     const doFetch = async () => {
         setIsLoading(true);
@@ -42,6 +43,34 @@ export default function Playlists() {
             });
     };
 
+    function handleMyPlaylists() {
+        setPlaylists([]);
+        setIsLoading(true);
+        fetch(paginaOwner, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Solicitud a las playlists errónea');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data.results) {
+                    setPlaylists(data.results);
+                }
+            })
+            .catch((error) => {
+                setIsError(true);
+                console.error(error, 'Error con mis playlists.');
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }
+
     function handleCargar() {
         if (nextURL) {
             setPagina((currentPage) => currentPage + 1);
@@ -60,6 +89,11 @@ export default function Playlists() {
                 <a href="/artistas">Artistas</a>
             </header>
             <h1>Playlists</h1>
+
+            {isLoading && <p>Cargando playlists...</p>}
+            
+            <button onClick={handleMyPlaylists}>Mis playlists</button>
+
             <ul>
                 {playlists.map((playlist) => (
                     <li key={playlist.id}>
