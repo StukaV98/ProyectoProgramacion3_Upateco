@@ -5,7 +5,6 @@ function SongCreate() {
 
     const { token } = useAuth("state");
 
-
     const [cancion, setCancion] = useState({
         title: "",
         year: 0
@@ -31,7 +30,7 @@ function SongCreate() {
             newForm.append("title", cancion.title);
             newForm.append("year", cancion.year);
 
-            fetch(`${import.meta.env.VITE_API_BASE_URL}/harmonyhub/songs/`,{
+            fetch(`${import.meta.env.VITE_API_BASE_URL}harmonyhub/songs/`,{
                 method: "POST",
                 headers: {
                     Authorization: `Token ${token}`
@@ -57,7 +56,6 @@ function SongCreate() {
         }
         
     }
-
 
     return (
         <div>

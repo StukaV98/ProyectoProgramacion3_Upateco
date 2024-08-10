@@ -15,7 +15,8 @@ export default function Songs() {
     const { token , user__id } = useAuth("state");
 
 
-    let url = `${import.meta.env.VITE_API_BASE_URL}/harmonyhub/songs/?page=${pagina}`
+    let url = `${import.meta.env.VITE_API_BASE_URL}harmonyhub/songs/?page=${pagina}`
+    let paginaOwner = `${import.meta.env.VITE_API_BASE_URL}harmonyhub/songs/?owner=${user__id}`
 
     /* 
         Funcion asincrona doFetch que realiza una solicitud a la API
@@ -48,6 +49,32 @@ export default function Songs() {
 
     }
     
+    /* handle que maneja el boton 'Mis canciones' para la eliminacion o edicion */
+
+    function handleMySongs(){
+        setSongs([]);
+        setIsLoading(true);
+        fetch(paginaOwner)
+            .then((response) => {
+                if(!response.ok){
+                    throw new Error('Solicitud a las canciones erronea')
+                }
+                return response.json()
+            })
+            .then((data) => {
+                if(data.results){
+                    setSongs(data.results)
+                }
+            })
+            .catch((error) => {
+                setIsError(true)
+                console.error(error, 'Error con mis canciones.')
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }
+
     /* funcion handleLoadMore implementada en clases */
     function handleCargar(){
 
@@ -68,19 +95,19 @@ export default function Songs() {
                 <a href="/artistas">Artistas</a>
             </header>
             <h1>Canciones</h1>
+            
+            {
+                isLoading ? (
+                    <p>Cargando canciones</p>
+                ) : (
+                    null
+                )
+            }
+
+            <button onClick={handleMySongs}>Mis canciones</button>
             <ul>
                 {songs.map((song) => (
-                    <li key={song.id}>
-                        
-                        <SongCard song={song} userId={user__id} />
-                       
-                        {/* <div className="track">
-                            <audio controls>
-                                <source src={song.song_file} type="audio/mpeg" />
-                            </audio>
-                        </div> */}
-                        
-                    </li>
+                    <SongCard key={song.id} song={song} userId={user__id}/>
                 ))}
             </ul>
             <div>
@@ -98,14 +125,6 @@ export default function Songs() {
                     <a href="/songs/new/">Crear canción</a>
                 </div>
             </div>
-
-            
-            
-            {/*  Paginador de prueba
-            <div>
-                <a href="#">Volver a {pagina-1}</a>
-                <a href="#" >Siguiente página - {pagina+1}</a>
-            </div> */}
             <Footer/>
 
         </div>

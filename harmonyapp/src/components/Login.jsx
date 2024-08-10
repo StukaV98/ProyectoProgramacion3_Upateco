@@ -33,7 +33,7 @@ function Login() {
                     /* obtengo el token de este response Data */
                     login(responseData.token);
                     if(responseData.token){
-                        fetch(`${import.meta.env.VITE_API_BASE_URL}/users/profiles/profile_data`,{
+                        fetch(`${import.meta.env.VITE_API_BASE_URL}users/profiles/profile_data`,{
                             method: "GET",
                             headers: {
                                 Authorization: `Token ${responseData.token}`,
@@ -71,45 +71,45 @@ function Login() {
     }
 
     return (
-        <section className="section">
-            <div className="columns is-centered">
-                <div className="column is-4">
+        <section className="">
+            <div className="">
+                <div className="">
                     <form onSubmit={handleSubmit}>
-                        <div className="field">
+                        <div className="">
                             <label htmlFor="username">Nombre de usuario:</label>
-                            <div className="control has-icons-left">
+                            <div className="">
                                 <input
-                                    className="input"
+                                    className=""
                                     type="text"
                                     id="username"
                                     name="username"
                                     ref={usernameRef}
                                 />
-                                <span className="icon is-small is-left">
-                                    <i className="fas fa-user"></i>
+                                <span className="">
+                                    <i className=""></i>
                                 </span>
                             </div>
                         </div>
-                        <div className="field">
+                        <div className="">
                             <label htmlFor="password">Contraseña:</label>
-                            <div className="control has-icons-left">
+                            <div className="">
                                 <input
-                                    className="input"
+                                    className=""
                                     type="password"
                                     id="password"
                                     name="password"
                                     ref={passwordRef}
                                 />
-                                <span className="icon is-small is-left">
+                                <span className="">
                                     <i className="fas fa-lock"></i>
                                 </span>
                             </div>
                         </div>
-                        <div className="field">
-                            <div className="control">
+                        <div className="">
+                            <div className="">
                                 <button
                                     type="submit"
-                                    className="button is-primary is-fullwidth"
+                                    className=""
                                 >
                                     Enviar
                                 </button>
