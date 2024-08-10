@@ -9,10 +9,7 @@ export default function SongEdit({ isOpen, onClose, song_id  }) {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [cancion, setCancion] = useState({})
-    const [cancionEdit, setCancionEdit] = useState({
-        title: "",
-        year: 0
-    })
+    const [cancionEdit, setCancionEdit] = useState(null)
 
     const doFetch = async () => {
         setIsLoading(true)
@@ -46,7 +43,7 @@ export default function SongEdit({ isOpen, onClose, song_id  }) {
 
     useEffect(() => {
         doFetch();
-    }, [cancion]);
+    }, [url]);
 
     if (!isOpen) return null;
 
@@ -56,6 +53,9 @@ export default function SongEdit({ isOpen, onClose, song_id  }) {
                 <p>Editar cancion</p>
                 <form>
                     <label htmlFor="title">Titulo: {cancion.title} </label>
+                    <input 
+                        type="text"
+                    />
                 </form>
                 <button
                     className=""
