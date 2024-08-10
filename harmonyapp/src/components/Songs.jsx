@@ -70,7 +70,17 @@ export default function Songs() {
             <h1>Canciones</h1>
             <ul>
                 {songs.map((song) => (
-                    <SongCard key={song.id} song={song} userId={user__id}/>
+                    <li key={song.id}>
+                        
+                        <SongCard song={song} userId={user__id} />
+                       
+                        {/* <div className="track">
+                            <audio controls>
+                                <source src={song.song_file} type="audio/mpeg" />
+                            </audio>
+                        </div> */}
+                        
+                    </li>
                 ))}
             </ul>
             <div>

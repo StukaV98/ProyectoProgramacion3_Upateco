@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../Home";
-import Artista from "../Artists";
 import Contacto from "../Contacto";
 import Profile from "../Profile";
 import Login from "../Login";
@@ -11,6 +10,8 @@ import Songs from "../Songs";
 import SongCreate from "../SongCreate";
 import Artists from "../Artists";
 import ArtistCreate from "../ArtistCreate";
+import PlaylistCreate from "../PlaylistCreate";
+import NotFound404 from "../NotFound404";
 
 
 const Router = createBrowserRouter([
@@ -44,28 +45,27 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/playlists",
-                element: (
-                    <ProtectedRoute>
-                        <Playlists />
-                    </ProtectedRoute>
-                )
+                children: [
+                    {
+                        index: true,
+                        element: (
+                            (
+                                <ProtectedRoute>
+                                    <Playlists />
+                                </ProtectedRoute>
+                            )
+                        ),
+                    },
+                    {
+                        path: "/playlists/new",
+                        element: (
+                                <ProtectedRoute>
+                                    <PlaylistCreate />
+                                </ProtectedRoute>
+                        )
+                    },
+                ],
             },
-            //  {
-            //      path: "/artistas",
-            //      element: (
-            //          <ProtectedRoute>
-            //              <Artists />
-            //          </ProtectedRoute>
-            //      )
-            //  },
-            //  {
-            //      path: "/artistas/new",
-            //      element: (
-            //          <ProtectedRoute>
-            //              <ArtistCreate />
-            //          </ProtectedRoute>
-            //      )
-            //  },
               {
                   path: "/artistas",
                   children: [
@@ -117,7 +117,7 @@ const Router = createBrowserRouter([
     },
     {
         path: "*",
-        element: <h2>Pagina no encontrada</h2>,
+        element: <NotFound404 />,
     },
 ])
 

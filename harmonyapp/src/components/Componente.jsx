@@ -1,7 +1,7 @@
 import React from 'react'
 // import '../styles/componente.css'
 
-const urlApi = `${import.meta.env.VITE_API_BASE_URL}docs/`
+const urlApi = `${import.meta.env.VITE_API_BASE_URL}/docs/`
 
 const Componente = () => {
   return (
