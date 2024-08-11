@@ -8,11 +8,10 @@ import ProtectedRoute from './ProtectedRoute'
 import Playlists from "../Playlists";
 import Songs from "../Songs";
 import SongCreate from "../SongCreate";
-import Artists from "../Artists";
-import ArtistCreate from "../ArtistCreate";
+import Artista from "../Artista";
+import ArtistaCreate from "../ArtistaCreate";
 import PlaylistCreate from "../PlaylistCreate";
 import NotFound404 from "../NotFound404";
-
 
 const Router = createBrowserRouter([
     {
@@ -74,7 +73,7 @@ const Router = createBrowserRouter([
                           element: (
                               (
                                   <ProtectedRoute>
-                                      <Artists />
+                                      <Artista />
                                   </ProtectedRoute>
                               )
                           ),
@@ -83,7 +82,7 @@ const Router = createBrowserRouter([
                           path: "/artistas/new",
                           element: (
                                   <ProtectedRoute>
-                                      <ArtistCreate />
+                                      <ArtistaCreate />
                                   </ProtectedRoute>
                           )
                       },
