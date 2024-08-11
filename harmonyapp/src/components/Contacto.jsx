@@ -5,7 +5,7 @@ function Contacto() {
         <div className="box has-text-centered has-background-primary-light">
             <h1 className="title is-2 has-text-info">Contacto</h1>
             <p className="is-size-5 has-text-warning-dark">
-               ¡Seguinos en nuestras redes!
+               ¡Sigue a UPATECO en redes!
             </p>
             <div className="buttons is-centered mt-4">
                 <a

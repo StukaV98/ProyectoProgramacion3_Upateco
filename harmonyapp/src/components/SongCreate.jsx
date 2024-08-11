@@ -66,8 +66,8 @@ function SongCreate() {
                         <label>Titulo:</label>
                         <input 
                             type="text"
-                            min="3"
-                            max="255"
+                            minLength="3"
+                            maxLength="255"
                             name='title'
                             value={cancion.title}
                             onChange={handleInputChange}

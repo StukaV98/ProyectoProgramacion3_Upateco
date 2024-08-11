@@ -1,34 +1,40 @@
-import React from 'react';
-import Componente from './Componente';
+import React from 'react'
 import Footer from './Footer';
 import { useAuth } from './contexts/AuthContext';
 
+
+
 function Home() {
+
+    const urlApi = `${import.meta.env.VITE_API_BASE_URL}/docs/`
+
     return (
-        <div className="container">
-            <header className="box has-background-primary-light has-text-centered">
-                <Componente />
-            </header>
+        <div>
+            <div>
+                <nav>
+                    <ul>
+                        <li><a href={urlApi}>Api</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/login">Iniciar sesion</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <h1>Welcome to music app</h1>
+            
+            <div>
+                <h3>En esta aplicacion se encuentran Playlists, Artistas y Canciones</h3>
+                <p>Para crear artistas y canciones deberás iniciar sesión</p>
+                <p>Navega libremente por la web</p>
+                <div>
+                    <a href="/playlists">Ir a Playlists</a>
+                    <a href="/artistas">Ir a Artistas</a>
+                    <a href="/songs">Ir a Canciones</a>
 
-            <section className="section has-text-centered">
-                <h1 className="title has-text-primary-white">Welcome to music app</h1>
-                
-                <div className="content">
-                    <h3 className="subtitle has-text-info-white">En esta aplicación se encuentran Playlists, Artistas y Canciones</h3>
-                    <p className="has-text-grey-white">Para crear artistas y canciones deberás iniciar sesión</p>
-                    <p className="has-text-grey-white">Navega libremente por la web</p>
                 </div>
-
-                <div className="buttons is-centered mt-5">
-                    <a href="/playlists" className="button is-info">Ir a Playlists</a>
-                    <a href="/artistas" className="button is-primary">Ir a Artistas</a>
-                    <a href="/songs" className="button is-success">Ir a Canciones</a>
-                </div>
-            </section>
-
+            </div>
             <Footer />
         </div>
-    );
+    )
 }
 
-export default Home;
+export default Home

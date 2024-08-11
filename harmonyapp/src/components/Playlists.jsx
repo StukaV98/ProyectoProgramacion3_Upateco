@@ -15,11 +15,15 @@ export default function Playlists() {
     let url = `${import.meta.env.VITE_API_BASE_URL}/harmonyhub/playlists/?page=${pagina}`;
     let paginaOwner = `${import.meta.env.VITE_API_BASE_URL}/harmonyhub/playlists/?owner=${user__id}`;
 
+    /*
+        Funcion asincrona que 
+    */
+
     const doFetch = async () => {
         setIsLoading(true);
         fetch(url, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Token ${token}`,
             },
         })
             .then((response) => {
@@ -48,7 +52,7 @@ export default function Playlists() {
         setIsLoading(true);
         fetch(paginaOwner, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Token ${token}`,
             },
         })
             .then((response) => {
@@ -85,15 +89,12 @@ export default function Playlists() {
         <div>
             <header>
                 <a href="/profile">Mi perfil</a>
-                <a href="/playlists">Playlists</a>
+                <a href="/songs">Canciones</a>
                 <a href="/artistas">Artistas</a>
             </header>
             <h1>Playlists</h1>
 
             {isLoading && <p>Cargando playlists...</p>}
-            
-            <button onClick={handleMyPlaylists}>Mis playlists</button>
-
             <ul>
                 {playlists.map((playlist) => (
                     <li key={playlist.id}>
@@ -108,10 +109,6 @@ export default function Playlists() {
                         Cargar más
                     </button>
                 )}
-
-                <div>
-                    <a href="/playlists/new/">Crear playlist</a>
-                </div>
             </div>
             <Footer />
         </div>

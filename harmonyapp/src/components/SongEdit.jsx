@@ -9,7 +9,13 @@ export default function SongEdit({ isOpen, onClose, song_id  }) {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [cancion, setCancion] = useState({})
-    const [cancionEdit, setCancionEdit] = useState(null)
+    const [cancionEdit, setCancionEdit] = useState({
+        title: "",
+        year: 0
+    })
+
+    /* estado para no enviar multiples peticiones a la API y comprobar campos */
+    const [submitting, setSubmitting] = useState(false);
 
     const doFetch = async () => {
         setIsLoading(true)
@@ -26,18 +32,58 @@ export default function SongEdit({ isOpen, onClose, song_id  }) {
                 return response.json()
             })
             .then((data) => {
-                console.log(data)
                 if(data){
                     setCancion(data);
                 }
             })
             .catch((error) => {
-                setIsError(true)
                 console.error(error, 'Error con el Data.')
             })
             .finally(() => {
                 setIsLoading(false)
             })
+
+    }
+
+    function handleInputChange(e){
+        setCancionEdit({
+            ...cancionEdit,
+            [e.target.name] : e.target.value,
+        });
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        if(!submitting){
+            setSubmitting(true);
+            const newForm = new FormData();
+            newForm.append("title", cancionEdit.title)
+            newForm.append("year", cancionEdit.year)
+
+            fetch(`${import.meta.env.VITE_API_BASE_URL}/harmonyhub/songs/${song_id}/`,{
+                method: "PATCH",
+                headers: {
+                    Authorization: `Token ${token}`
+                },
+                body: newForm,
+            })
+                .then((response) => {
+                    if(!response.ok){
+                        setIsError(true)
+                        throw new Error("No se pudo Editar la cancion")
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data)
+                })
+                .catch((error) => {
+                    console.error("Error al editar la cancion", error)
+                })
+                .finally(() => {
+                    return setSubmitting(false)
+                })
+        }
 
     }
 
@@ -51,11 +97,35 @@ export default function SongEdit({ isOpen, onClose, song_id  }) {
         <div>
             <div>
                 <p>Editar cancion</p>
-                <form>
-                    <label htmlFor="title">Titulo: {cancion.title} </label>
-                    <input 
-                        type="text"
-                    />
+                {isLoading ? <h3>Cargando...</h3> : null }
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="title">Titulo: {cancion.title} </label>
+                        <label htmlFor="title">Nuevo titulo:</label>
+                        <input 
+                            type="text"
+                            minLength="3"
+                            maxLength="255"
+                            name='title'
+                            value={cancionEdit.title}
+                            onChange={handleInputChange}
+                        />
+                        <label htmlFor="year">Año: {cancion.year} </label>
+                        <label htmlFor="year">Cambiar año:</label>
+                        <input 
+                            type="number"
+                            min="0"
+                            max="2024"
+                            name='year'
+                            value={cancionEdit.year}
+                            onChange={handleInputChange}
+                        />
+                        
+                    </div>
+                    <button type='submit' disabled={submitting}>
+                        Confirmar edición
+                    </button>
+                    {isError ? <p>Error al editar</p> : null }
                 </form>
                 <button
                     className=""

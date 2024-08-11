@@ -16,6 +16,10 @@ export const SongCard = ({ song, userId }) => {
                 <p>Duración: <span> { duration ? duration + " segundos" : "Sin especificacion" }</span></p>
                 <p>Año: <span> { year ? year : "No especificado" }</span></p>
                 <p> { view_count } <span>vistas</span></p>
+                <audio controls>
+                        <source src={song.song_file} type="audio/mpeg" />
+                        Tu navegador no soporta el elemento de audio.
+                </audio>
             </div>
             <div>
                 {/* 
