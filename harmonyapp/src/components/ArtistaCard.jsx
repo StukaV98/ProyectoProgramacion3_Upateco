@@ -16,8 +16,8 @@ export const ArtistaCard = ({ artist, userId }) => {
                 <h2 className='title'> {name} </h2>
                 <div>
                     <p className='subtitle'>Biografía: <span> {bio ? bio : "Sin datos."} </span></p>
-                    <p>Página web: <span className='tag is-link'>{website ? <a className='has-text-white' href={website} target="_blank" rel="noopener noreferrer">{website}</a> : "No especificada"}</span></p>
-                    <p className=''>Creado: <span> { new Date(created_at).toLocaleDateString("es-ES") } </span></p>
+                    <p className='subtitle'>Página web: <span className='tag is-link'>{website ? <a className='has-text-white' href={website} target="_blank" rel="noopener noreferrer">{website}</a> : "No especificada"}</span></p>
+                    <p className='subtitle'>Creado: <span> { new Date(created_at).toLocaleDateString("es-ES") } </span></p>
                 </div>
             </div>
             <div>

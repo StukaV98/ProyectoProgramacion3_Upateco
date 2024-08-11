@@ -71,15 +71,15 @@ function Login() {
     }
 
     return (
-        <section className="">
-            <div className="">
+        <section className="section">
+            <div className="box column is-half">
                 <div className="">
-                    <form onSubmit={handleSubmit}>
+                    <form className='form m-3' onSubmit={handleSubmit}>
                         <div className="">
                             <label htmlFor="username">Nombre de usuario:</label>
-                            <div className="">
+                            <div className="field">
                                 <input
-                                    className=""
+                                    className='input'
                                     type="text"
                                     id="username"
                                     name="username"
@@ -90,11 +90,11 @@ function Login() {
                                 </span>
                             </div>
                         </div>
-                        <div className="">
+                        <div className="field">
                             <label htmlFor="password">Contraseña:</label>
                             <div className="">
                                 <input
-                                    className=""
+                                    className='input'
                                     type="password"
                                     id="password"
                                     name="password"
@@ -106,10 +106,10 @@ function Login() {
                             </div>
                         </div>
                         <div className="">
-                            <div className="">
+                            <div className="grid">
                                 <button
                                     type="submit"
-                                    className=""
+                                    className='button is-success mt-3'
                                 >
                                     Enviar
                                 </button>
@@ -117,7 +117,7 @@ function Login() {
                                 {isError && <p>Error al cargar los datos.</p>}
                             </div>
                         </div>
-                        <a href="/">Inicio</a>
+                        <a className='button is-dark mt-3' href="/">Inicio</a>
                     </form>
                 </div>
             </div>

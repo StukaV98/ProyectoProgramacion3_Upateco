@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 
 function Footer() {
-    return (
-        <footer className="footer has-background-primary-light has-text-centered py-4">
-            <p className="has-text-primary-dark is-size-5">
-                Todos los derechos reservados - Grupo 18 Upateco {new Date().getFullYear()}
-            </p>
-        </footer>
-    );
+
+  return(
+    <footer className="footer has-background-link-dark has-text-centered p-4">
+      <p className="has-text-warning is-size-5 is-uppercase has-text-weight-bold">Todos los derechos reservados - Walter Agustín Llanes {new Date().getFullYear()}</p>
+    </footer>
+  )
+
 }
 
-export default Footer;
+export default Footer

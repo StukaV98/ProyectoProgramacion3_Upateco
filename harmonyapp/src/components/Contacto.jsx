@@ -25,6 +25,8 @@ function Contacto() {
                     Instagram
                 </a>
             </div>
+            <a className='mt-3 button' href="/">Volver</a>
+
         </div>
     );
 }
